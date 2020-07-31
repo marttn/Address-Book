@@ -1,0 +1,41 @@
+﻿@model IEnumerable<AddressBook.Models.User>
+@{
+    ViewBag.Title = "Address book";
+    var areaName = HttpContext.Current.Request.RequestContext.RouteData.DataTokens["area"].ToString();
+}
+
+<h2>Users</h2>
+
+<p>
+    @Html.ActionLink("Add new user", "AddUser")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.ActionLink("Phone numbers", "UserPhoneNumbers", new { id = item.Id, area = areaName }) |
+                @Html.ActionLink("Edit user", "EditUser", new { id = item.Id, area = areaName }) |
+                @Html.ActionLink("Delete user", "DeleteUser", new { id = item.Id, area = areaName })
+            </td>
+        </tr>
+    }
+
+</table>
