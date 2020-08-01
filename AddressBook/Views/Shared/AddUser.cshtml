@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Add user";
-    var areaName = HttpContext.Current.Request.RequestContext.RouteData.DataTokens["area"].ToString();
+    var areaName = HttpContext.Current.Request.RequestContext.RouteData.DataTokens["area"]?.ToString();
 }
 
 <h2>Add user</h2>
@@ -40,5 +40,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to users list", "Index", new {area = areaName})
+    @Html.ActionLink("Back to users list", "Index", new {area = GlobalVariables.AreaName})
 </div>

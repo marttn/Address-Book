@@ -13,5 +13,7 @@ namespace AddressBook.Models
         [RegularExpression(@"^\w{1,50}$", ErrorMessage = "Please enter a valid last name")]
         [Display(Name = "Last name")]
         public string LastName { get; set; }
+
+        public int Address { get; set; }
     }
 }

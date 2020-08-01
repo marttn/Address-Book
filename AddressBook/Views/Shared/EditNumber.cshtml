@@ -2,8 +2,6 @@
 
 @{
     ViewBag.Title = "Edit number";
-    int.TryParse(ViewBag.UserId.ToString(), out int userId);
-    var areaName = HttpContext.Current.Request.RequestContext.RouteData.DataTokens["area"].ToString();
 }
 
 <h2>Edit number</h2>
@@ -14,7 +12,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>PhoneNumber</h4>
+        <h4>Phone number</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -33,8 +31,8 @@
             @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.IsActive, new { @class = "ml-0" })
-                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.IsActive, new { htmlAttributes = new { @class = "ml-0" } })
+                    @Html.ValidationMessageFor(model => model.IsActive, "", new {@class = "text-danger"})
                 </div>
             </div>
         </div>
@@ -48,7 +46,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to numbers", "UserPhoneNumbers", new { id = userId, area = areaName })
+    @Html.ActionLink("Back to numbers", "UserPhoneNumbers", new { id = GlobalVariables.CurrentUser.Id, area = GlobalVariables.AreaName })
 </div>
 
 

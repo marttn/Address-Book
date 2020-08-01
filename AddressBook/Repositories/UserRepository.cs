@@ -26,7 +26,7 @@ namespace AddressBook.Repositories
                 using (var command = new SqlCommand("[GetUsers]", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@AddressNum", num-1);
+                    command.Parameters.AddWithValue("@AddressNum", num);
                     var reader = command.ExecuteReader();
                     while (reader.Read())
                     {
@@ -35,6 +35,7 @@ namespace AddressBook.Repositories
                             Id = int.Parse(reader["ID"].ToString()),
                             FirstName = reader["FirstName"].ToString(),
                             LastName = reader["LastName"].ToString(),
+                            Address = int.Parse(reader["Address"].ToString())
                         };
                         users.Add(user);
                     }
@@ -80,6 +81,7 @@ namespace AddressBook.Repositories
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = user.FirstName;
                     command.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = user.LastName;
+                    command.Parameters.Add("@Address", SqlDbType.Int).Value = user.Address;
                     command.ExecuteNonQuery();
                 }
             }

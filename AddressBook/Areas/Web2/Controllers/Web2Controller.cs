@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using AddressBook.Interfaces;
 using AddressBook.Models;
+using static AddressBook.GlobalVariables;
 
 namespace AddressBook.Areas.Web2.Controllers
 {
@@ -13,6 +14,8 @@ namespace AddressBook.Areas.Web2.Controllers
         {
             _userRepository = userRepository;
             _phoneNumberRepository = phoneNumberRepository;
+            AreaName = "Web2";
+            Address = 2;
         }
 
         public ActionResult Index()
@@ -32,6 +35,7 @@ namespace AddressBook.Areas.Web2.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.Address = Address;
                 _userRepository.AddUser(model);
                 return RedirectToAction("Index");
             }
@@ -72,16 +76,13 @@ namespace AddressBook.Areas.Web2.Controllers
         public ActionResult UserPhoneNumbers(int id)
         {
             var model = _phoneNumberRepository.GetUserNumbers(id);
-            var currentUser = _userRepository.GetUser(id);
-            ViewBag.UserId = id;
-            ViewBag.User = $"{currentUser.FirstName} {currentUser.LastName}";
+            CurrentUser = _userRepository.GetUser(id);
             return View(model);
         }
 
         public ActionResult AddNumber(int id)
         {
             var model = new PhoneNumber { UserId = id };
-            ViewBag.UserId = id;
             return View(model);
         }
 
@@ -93,7 +94,6 @@ namespace AddressBook.Areas.Web2.Controllers
                 _phoneNumberRepository.AddNumber(model);
                 return RedirectToAction("UserPhoneNumbers", new { id = model.UserId });
             }
-            ViewBag.UserId = model.UserId;
             return View(model);
         }
 
@@ -103,7 +103,6 @@ namespace AddressBook.Areas.Web2.Controllers
             var model = _phoneNumberRepository.GetNumber(id);
             if (model != null)
             {
-                ViewBag.UserId = model.UserId;
                 return View(model);
             }
 
@@ -118,7 +117,6 @@ namespace AddressBook.Areas.Web2.Controllers
                 _phoneNumberRepository.EditNumber(model);
                 return RedirectToAction("UserPhoneNumbers", new { id = model.UserId });
             }
-            ViewBag.UserId = model.UserId;
             return View(model);
         }
 

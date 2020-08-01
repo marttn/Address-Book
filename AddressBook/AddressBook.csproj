@@ -126,9 +126,11 @@
     <Compile Include="Areas\Web2\Controllers\Web2Controller.cs" />
     <Compile Include="Areas\Web2\Web2AreaRegistration.cs" />
     <Compile Include="Bindings.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="GlobalVariables.cs" />
     <Compile Include="Interfaces\IPhoneNumberRepository.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />
     <Compile Include="Models\PhoneNumber.cs" />
@@ -175,6 +177,7 @@
     <Content Include="Views\Shared\EditUser.cshtml" />
     <Content Include="Views\Shared\AddUser.cshtml" />
     <Content Include="Views\Shared\AddNumber.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

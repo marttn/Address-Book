@@ -2,13 +2,13 @@
 
 @{
     ViewBag.Title = "User phone numbers";
-    int.TryParse(ViewBag.UserId.ToString(), out int userId);
-    var areaName = HttpContext.Current.Request.RequestContext.RouteData.DataTokens["area"].ToString();
+    var user = GlobalVariables.CurrentUser;
 }
 
-<h2>@ViewBag.User's phone numbers</h2>
+<h2>@user.FirstName @user.LastName's phone numbers</h2>
+
 <p>
-    @Html.ActionLink("Add new number", "AddNumber", new { id = userId }) | @Html.ActionLink("Delete all numbers", "DeleteAllNumbers", new { id = userId })
+    @Html.ActionLink("Add new number", "AddNumber", new { id = GlobalVariables.CurrentUser.Id }) | @Html.ActionLink("Delete all numbers", "DeleteAllNumbers", new { id = GlobalVariables.CurrentUser.Id })
 </p>
 <table class="table">
     <tr>
@@ -36,8 +36,8 @@
                 <td>Inactive</td>
             }
             <td>
-                @Html.ActionLink("Edit", "EditNumber", new { id = item.Id, area = areaName }) |
-                @Html.ActionLink("Delete", "DeleteNumber", new { id = item.Id, area = areaName })
+                @Html.ActionLink("Edit", "EditNumber", new { id = item.Id, area = GlobalVariables.AreaName }) |
+                @Html.ActionLink("Delete", "DeleteNumber", new { id = item.Id, area = GlobalVariables.AreaName })
             </td>
         </tr>
     }
@@ -45,5 +45,5 @@
 </table>
 
 <div>
-    @Html.ActionLink("Back to users list", "Index", new { id = userId, area = areaName })
+    @Html.ActionLink("Back to users list", "Index", new { id = GlobalVariables.CurrentUser.Id, area = GlobalVariables.AreaName })
 </div>
